@@ -50,6 +50,7 @@ const dev = {
                         options: {
                             modules: true,
                             namedExport: true,
+                            exportOnlyLocals: true,
                         },
                     },
                     {

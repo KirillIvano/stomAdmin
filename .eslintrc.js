@@ -59,7 +59,7 @@ module.exports = {
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
         'react/boolean-prop-naming': 'error',
-        'react/button-has-type': 'error',
+        'react/button-has-type': 'off',
         'react/destructuring-assignment': 'error',
         'react/no-deprecated': 'error',
         'react/no-typos': 'error',
