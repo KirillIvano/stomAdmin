@@ -12,15 +12,15 @@ const App = () => {
             <Suspense fallback={<PagePreloader />}>
                 <Switch>
                     <Route
-                        to="/doctors"
+                        path="/doctors"
                         component={React.lazy(() => import('./../pages/Doctors/index'))}
                     />
                     <Route
-                        to="/offers"
+                        path="/offers"
                         component={React.lazy(() => import('./../pages/Offers/index'))}
                     />
                     <Route
-                        to="/offersPreviews"
+                        path="/offersPreviews"
                         component={React.lazy(() => import('./../pages/OfferPreviews/index'))}
                     />
                 </Switch>

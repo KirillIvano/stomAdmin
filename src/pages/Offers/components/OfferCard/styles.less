@@ -1,0 +1,25 @@
+.offerCard {
+    padding: 12px 20px;
+    background: #eee;
+    border-radius: 6px;
+    margin-top: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transform: translateY(0);
+    transition: box-shadow .6s;
+
+    .offerName {
+        font-size: 1.1rem;
+    }
+    .offerPrice {
+        color: rgb(0, 107, 66);
+    }
+}
+
+.offerCard.active {
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);   
+}

@@ -67,7 +67,7 @@ module.exports = {
         'react/react-in-jsx-scope': 'error',
         'react/jsx-no-undef': 'error',
         'react/jsx-no-useless-fragment': 'error',
-        'react/jsx-one-expression-per-line': 'error',
+        'react/jsx-one-expression-per-line': 'off',
         'react/jsx-pascal-case': 'error',
         'react/jsx-tag-spacing': 'error',
         'react/jsx-uses-react': 'error',
