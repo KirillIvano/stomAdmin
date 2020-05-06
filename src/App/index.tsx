@@ -1,18 +1,31 @@
-import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import React, {Suspense} from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
-import createStore from '@/redux';
+import {
+    PagePreloader,
+} from '@/pages';
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Provider store={createStore()}>
-                <div>
-                    {'app'}
-                </div>
-            </Provider>
-        </BrowserRouter>
+        <div>
+            <Suspense fallback={<PagePreloader />}>
+                <Switch>
+                    <Route
+                        to="/doctors"
+                        component={React.lazy(() => import('./../pages/Doctors/index'))}
+                    />
+                    <Route
+                        to="/offers"
+                        component={React.lazy(() => import('./../pages/Offers/index'))}
+                    />
+                    <Route
+                        to="/offersPreviews"
+                        component={React.lazy(() => import('./../pages/OfferPreviews/index'))}
+                    />
+                </Switch>
+            </Suspense>
+        </div>
     );
 };
 

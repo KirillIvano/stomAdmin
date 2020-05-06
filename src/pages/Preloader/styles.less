@@ -1,0 +1,27 @@
+@keyframes beat {
+    from {
+        transform: scale(1);
+    }
+    
+    50% {
+        transform: scale(.9);
+    }
+}
+
+.pagePreloader {
+    width: 100%;
+    height: 400px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .preloaderContent {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+
+        background: rgb(0, 161, 40);
+        animation: beat .6s infinite reverse;
+    }
+}

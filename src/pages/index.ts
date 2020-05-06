@@ -1,3 +1,4 @@
-import {default as DoctorsPage} from './Doctors';
-import {default as OffersPreviewsPage} from './OfferPreviews';
-import {default as OffersPage} from './Offers';
+export {default as DoctorsPage} from './Doctors';
+export {default as OffersPreviewsPage} from './OfferPreviews';
+export {default as OffersPage} from './Offers';
+export {default as PagePreloader} from './Preloader';
