@@ -1,15 +1,17 @@
 .offerCard {
+    position: relative;
+
     padding: 12px 20px;
     background: #eee;
     border-radius: 6px;
-    margin-top: 4px;
+    margin-top: 12px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     transform: translateY(0);
-    transition: box-shadow .6s;
+    transition: .6s;
 
     .offerName {
         font-size: 1.1rem;
@@ -21,5 +23,6 @@
 
 .offerCard.active {
     z-index: 1;
+    transition: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);   
 }

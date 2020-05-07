@@ -7,34 +7,46 @@ type OfferCardProps = {
     price: number;
     additionalOffset?: number;
     index: number;
-};
+
+    isDragged: boolean;
+
+    onDragStart: (index: number) => void;
+    onDragUpdate: (position: number) => void;
+    onDragEnd: (position: number) => void;
+ };
 
 const OfferCard = ({
     name,
     price,
     additionalOffset,
     index,
+
+    onDragStart,
+    onDragUpdate,
+    onDragEnd,
+    isDragged,
 }: OfferCardProps) => {
-    const [isDragged, setDragged] = useState(false);
     const [dragState, setDragState] = useState(0);
     const [dragOffset, setDragOffset] = useState(0);
 
-
     const handleDragStart = (e: React.MouseEvent) => {
-        setDragged(true);
         setDragOffset(e.pageY);
+        onDragStart(index);
     };
 
     const handleMove = (e: React.MouseEvent) => {
-        if (isDragged) {
+        const {pageY} = e;
+
+        if (isDragged && pageY !== dragOffset) {
             setDragState(e.pageY - dragOffset);
+            onDragUpdate(e.pageY);
         }
     };
 
-    const handleDragEnd = () => {
-        setDragged(false);
+    const handleDragEnd = (e: React.MouseEvent) => {
         setDragOffset(0);
         setDragState(0);
+        onDragEnd(e.pageY);
     };
 
     let translateY = 0;
@@ -45,18 +57,16 @@ const OfferCard = ({
         translateY = additionalOffset;
     }
 
-    console.log(translateY);
-
     return (
         <div
             onMouseDown={handleDragStart}
 
             onMouseMove={handleMove}
 
-            onMouseUp={handleDragEnd}
-            onMouseLeave={handleDragEnd}
+            onMouseUp={isDragged ? handleDragEnd : null}
+            onMouseLeave={isDragged ? handleDragEnd : null}
 
-            style={{transform: `translateY(${Math.round(translateY)}px)`}}
+            style={{transform: `translateY(${translateY}px)`}}
 
             className={
                 classnames(
