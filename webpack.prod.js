@@ -8,10 +8,9 @@ const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const webpack = require('webpack');
 
 const prod = {
-    entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, '..', 'simros', 'static', 'admin'),
-        publicPath: '/admin/',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
         filename: 'bundle.js',
     },
     optimization: {
@@ -23,15 +22,12 @@ const prod = {
     plugins: [
         new CleanObsoleteChunks(),
         new MiniCssExtractPlugin(),
-        new webpack.DefinePlugin({
-            SERVER_ORIGIN: '"http://194.67.113.29:5000"',
-            IMAGE_HOST: '"http://194.67.113.29:5000/images"',
-        }),
+
     ],
     mode: 'production',
     watch: true,
-    module: {
 
+    module: {
         rules: [
             {
                 test: /\.(png|jpg|svg)$/,
