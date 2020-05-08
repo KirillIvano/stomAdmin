@@ -1,11 +1,35 @@
 import React from 'react';
-import styles from './styles.less';
 
+import {
+    LayoutContainer,
+    ErrorView,
+    Preloader,
+    PageHeadline,
+} from '@/components';
 
-const OfferPreviewsPage = () => (
-    <div>
-        {'offers'}
-    </div>
-);
+import {useCategoriesData} from './hooks/useCategoriesData';
+import {CategoryCard} from './components';
 
+const OfferPreviewsPage = () => {
+    const {data, loading, error} = useCategoriesData();
+
+    if (loading) {
+        return <Preloader />;
+    }
+
+    if (error) {
+        return <ErrorView>{error}</ErrorView>;
+    }
+
+    return (
+        <LayoutContainer>
+            <PageHeadline>Категории услуг</PageHeadline>
+            {
+                data.map(
+                    ({name, id}) => <CategoryCard name={name} categoryId={id} key={id} />,
+                )
+            }
+        </LayoutContainer>
+    );
+};
 export default OfferPreviewsPage;
