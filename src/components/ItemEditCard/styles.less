@@ -1,0 +1,32 @@
+.itemEditCard {
+    position: relative;
+
+    padding: 12px 20px;
+    background: #eee;
+    border-radius: 6px;
+    margin-top: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .itemName {
+        font-size: .9rem;
+    }
+
+    .itemControls {
+        display: flex;
+        .itemButton {
+            padding: 6px;
+
+            &:not(:first-child) {
+                margin-left: 6px;
+            }
+            .itemIcon {
+                display: block;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
