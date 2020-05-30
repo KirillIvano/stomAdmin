@@ -4,8 +4,8 @@ import {
     LayoutContainer,
     ErrorView,
     Preloader,
-    PageHeadline,
-} from '@/components';
+} from '@/uikit';
+import {PageHeadline} from '@/components';
 
 import {useCategoriesData} from './hooks/useCategoriesData';
 import {CategoryCard} from './components';
@@ -26,7 +26,11 @@ const OfferPreviewsPage = () => {
             <PageHeadline>Категории услуг</PageHeadline>
             {
                 data.map(
-                    ({name, id}) => <CategoryCard name={name} categoryId={id} key={id} />,
+                    ({name, id}) => (<CategoryCard
+                        name={name}
+                        categoryId={id}
+                        key={id}
+                    />),
                 )
             }
         </LayoutContainer>

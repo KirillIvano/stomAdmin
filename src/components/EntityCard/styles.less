@@ -16,17 +16,14 @@
 
     .itemControls {
         display: flex;
-        .itemButton {
-            padding: 6px;
 
-            &:not(:first-child) {
-                margin-left: 6px;
-            }
-            .itemIcon {
-                display: block;
-                width: 16px;
-                height: 16px;
-            }
+        .itemIcon {
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+        .itemIcon:not(:first-child) {
+            margin-left: 6px;
         }
     }
 }

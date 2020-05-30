@@ -1,9 +1,9 @@
 import React from 'react';
 
+import {EntityCard} from '@/components';
+
 import styles from './styles.less';
 import {useOffersData} from './hooks/useOffersData';
-import {OfferCard} from './../';
-
 
 interface OffersSectionProps {
     categoryId: number;
@@ -19,9 +19,11 @@ const OffersSection: React.FC<OffersSectionProps> = ({
 
     return (
         <div className={styles.offersSection}>
-            {offers.map(
-                ({name, price, id}) => <OfferCard name={name} price={price} key={id} />,
-            )}
+            {
+                offers.length ? offers.map(
+                    ({name, id}) => <EntityCard name={name} key={id} />,
+                ) : 'empty'
+            }
         </div>
     );
 };
