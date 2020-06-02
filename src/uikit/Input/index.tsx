@@ -9,8 +9,11 @@ interface InputPropsType extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input: React.FC<InputPropsType> = ({
     className,
+
+    ...props
 }) => (
     <input
+        {...props}
         className={classnames(
             styles.input,
             {
