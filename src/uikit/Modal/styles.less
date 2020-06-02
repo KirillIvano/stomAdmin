@@ -1,3 +1,44 @@
 .modalOverlay {
-    
+    position: fixed;
+
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+
+    background: rgba(35, 43, 68, 0.8);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal {
+        position: relative;
+
+        border-radius: 8px;
+        background: #eee;
+
+        padding: 30px;
+
+        width: 600px;
+
+        .closeIcon {
+            position: absolute;
+
+            width: 20px;
+            height: 20px;    
+            
+            right: 5px;
+            top: 5px;
+
+            cursor: pointer;
+            
+            transition: .3s;
+            transform-origin: center;
+        }
+
+        .closeIcon:active {
+            transform: scale(.85);
+        }
+    }
 }
