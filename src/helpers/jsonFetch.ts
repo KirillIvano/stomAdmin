@@ -1,15 +1,33 @@
+type DataType<T extends object> = {
+    data: T;
+    ok: true;
+} | {
+    error: string;
+    ok: false;
+}
+
 export const jsonFetch = async <T extends object,>(
     url: RequestInfo,
     options?: RequestInit,
-): Promise<T> => {
-    let response: T | {error: string};
+): Promise<DataType<T>> => {
+    let body: {data: T} | {error: string};
+    let ok: boolean;
+
     try {
-        response = await fetch(url, options).then(res => res.json());
+        const res = await fetch(url, options);
+        ok = res.ok;
+
+        body = await res.json();
     } catch {
-        throw 'Неизвестная ошибка, зайдите позже';
+        return {error: 'Unexpected error', ok: false};
     }
 
-    if ('error' in response) throw response.error;
+    if (ok === false) {
+        return {
+            error: (body as {error: string}).error,
+            ok,
+        };
+    }
 
-    return response;
+    return {data: (body as {data: T}).data, ok};
 };
