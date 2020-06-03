@@ -7,16 +7,15 @@ import styles from './styles.less';
 interface OfferCardProps {
     name: string;
 
-    id: string;
+    id: number;
 
-    handleDeleteClick: (id: string) => void;
-    handleEditClick: (id: string) => void;
-    handleBodyClick?: (id: string) => void;
+    handleDeleteClick: (id: number) => void;
+    handleEditClick: (id: number) => void;
+    handleBodyClick?: (id: number) => void;
 }
 
 const EntityCard = ({
     name,
-
     id,
 
     handleDeleteClick,
@@ -25,10 +24,10 @@ const EntityCard = ({
 }: OfferCardProps) => (
     <div
         className={styles.itemEditCard}
-        onClick={() => handleBodyClick(id)}
+        onClick={handleBodyClick && (() => handleBodyClick(id))}
     >
         <p className={styles.itemName}>{name}</p>
-        <div className={styles.itemControls}>
+        <div onClick={e => e.stopPropagation()} className={styles.itemControls}>
             <DeleteIcon size={'sm'} handleClick={() => handleDeleteClick(id)} />
             <EditIcon size={'sm'} handleClick={() => handleEditClick(id)} />
         </div>
