@@ -42,13 +42,13 @@
     "paths": {
       "@/*": ["src/*"],
     },
-    "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
+    "experimentalDecorators": true      /* Enables experimental support for ES7 decorators. */
   },
   "exclude": [
     "node_modules",
     "dist",
     "./webpack.dev.js",
     "./webpack.prod.js",
-    "./webpack.common.js",
+    "./webpack.common.js"
   ]
 }
