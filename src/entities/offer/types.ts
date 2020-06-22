@@ -1,5 +1,6 @@
 export class Offer {
-    id: number;
+    id: string;
     name: string;
     price: number;
+    categoryId: string;
 }

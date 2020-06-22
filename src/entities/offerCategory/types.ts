@@ -1,4 +1,4 @@
 export class OfferCategory {
-    id: number;
+    id: string;
     name: string;
 }

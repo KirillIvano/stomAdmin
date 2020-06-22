@@ -1,19 +1,25 @@
-import {observable} from 'mobx';
+import {observable, action, computed} from 'mobx';
 
 import {Offer} from './types';
 
 export class OfferStore {
-    @observable offers: Record<string, Offer> = {
-        2: {
-            id: 2,
-            name: 'asfas',
-            price: 2000,
-        },
-    };
+    @observable
+    offers = new Map<string, Offer>();
 
-    @observable offersGettingLoading = false;
-    @observable offersGettingError: string | null = null;
-    @observable offersLoading = false;
+    @computed
+    get offersArray() {
+        this.offers;
+        return [...this.offers.values()];
+    }
+
+    @action
+    addOffer = async (offer: Offer) => {
+        this.offers.set(offer.id, offer);
+    }
+    @action
+    addOffers = async (offers: Offer[]) => {
+        offers.map(this.addOffer);
+    }
 }
 
 export const offerStore = new OfferStore();
