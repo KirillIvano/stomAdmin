@@ -5,6 +5,25 @@ import ReactModal from 'react-modal';
 import styles from './styles.less';
 import closeIconSrc from './images/close.svg';
 
+
+interface ModalControlsProps extends React.BaseHTMLAttributes<HTMLDivElement> {
+    className?: string;
+}
+
+export const ModalControls = ({
+    className,
+
+    ...props
+}: ModalControlsProps) => (
+    <div
+        className={classnames(
+            className,
+            styles.modalControls,
+        )}
+        {...props}
+    />
+);
+
 type ModalProps = {
     isOpen: boolean;
     className?: string;

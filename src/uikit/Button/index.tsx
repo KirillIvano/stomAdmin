@@ -17,6 +17,7 @@ const Button: React.FC<ButtonPropsType> = ({
     ...props
 }) => (
     <button
+        {...props}
         disabled={isDisabled}
         className={classnames(
             styles.button,
@@ -25,7 +26,6 @@ const Button: React.FC<ButtonPropsType> = ({
                 [styles.disabled]: isDisabled,
             },
         )}
-        {...props}
     >
         {children}
     </button>

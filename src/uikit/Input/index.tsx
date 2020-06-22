@@ -5,11 +5,12 @@ import styles from './styles.less';
 
 interface InputPropsType extends React.InputHTMLAttributes<HTMLInputElement> {
     className?: string;
+    type?: string;
 }
 
 const Input: React.FC<InputPropsType> = ({
     className,
-
+    type='text',
     ...props
 }) => (
     <input
@@ -20,7 +21,7 @@ const Input: React.FC<InputPropsType> = ({
                 [className]: Boolean(className),
             },
         )}
-        type="text"
+        type={type}
     />
 );
 
