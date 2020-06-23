@@ -1,8 +1,6 @@
 import React from 'react';
 import {Subtract} from 'utility-types';
 
-import {OffersModalContext} from './context';
-import {useOffersModalsReducer} from './hooks';
 import {ModalManager} from './modals';
 import {ModalType} from './types';
 
@@ -11,11 +9,10 @@ type AdditionalPropsType = {
 };
 
 export const withModalManager = <T extends AdditionalPropsType,>(Comp: React.ComponentType<T>) =>
-    (props: Subtract<T, AdditionalPropsType>) => {
-        const context = useOffersModalsReducer();
-
-        return (<OffersModalContext.Provider value={context}>
-            <Comp {...props as T} openedModal={context.state.openedModal} />
+    (props: Subtract<T, AdditionalPropsType>) => (
+        <>
+            <Comp {...props as T} />
             <ModalManager />
-        </OffersModalContext.Provider>);
-    };
+        </>
+    );
+

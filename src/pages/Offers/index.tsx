@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {observer} from 'mobx-react';
 
 import {
     LayoutContainer,
@@ -6,27 +7,29 @@ import {
     Preloader,
 } from '@/uikit';
 import {PageHeadline} from '@/components';
+import {offerCategoriesStore} from '@/entities/offerCategory/store';
 
-import {useCategoriesData} from './hooks/useCategoriesData';
 import {CategoryCard} from './components';
+import {withModalManager} from './modals';
+import {offersModalState} from './modals/localStore';
+import {offerCategoriesGettingStore} from './store';
 
-const OfferPreviewsPage = () => {
-    const {data, loading, error} = useCategoriesData();
 
-    if (loading) {
-        return <Preloader />;
-    }
+const OffersPage = observer(() => {
+    const {categoriesArray} = offerCategoriesStore;
+    const {getCategories} = offerCategoriesGettingStore;
 
-    if (error) {
-        return <ErrorView>{error}</ErrorView>;
-    }
+    useEffect(() => {getCategories();}, []);
 
     return (
         <LayoutContainer>
             <PageHeadline>Категории услуг</PageHeadline>
             {
-                data.map(
+                categoriesArray.map(
                     ({name, id}) => (<CategoryCard
+                        openCreateOfferModal={() => {
+                            offersModalState.openModal('offer_create', id);
+                        }}
                         name={name}
                         categoryId={id}
                         key={id}
@@ -35,5 +38,8 @@ const OfferPreviewsPage = () => {
             }
         </LayoutContainer>
     );
-};
-export default OfferPreviewsPage;
+});
+
+const enchandtedModalManager = withModalManager(OffersPage);
+
+export default enchandtedModalManager;

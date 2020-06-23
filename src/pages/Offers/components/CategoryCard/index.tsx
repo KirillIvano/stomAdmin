@@ -1,30 +1,36 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import styles from './styles.less';
+import {GroupCard} from '@/components';
+
 import {OffersSection} from '..';
 
 interface CategoryCardProps {
-    categoryId: number;
+    categoryId: string;
     name: string;
+
+    // openEditModal: (id: number) => void;
+    // openDeleteModal: (id: number) => void;
+    openCreateOfferModal: () => void;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
     categoryId,
     name,
-}) => {
-    const [isContentShown, setContentVisibility] = useState(false);
 
-    return (
-        <>
-            <div
-                className={styles.categoryCard}
-                onClick={() => setContentVisibility(isVisible => !isVisible)}
-            >
-                <h1 className={styles.categoryName}>{name}</h1>
-            </div>
-            {isContentShown && <OffersSection categoryId={categoryId} />}
-        </>
-    );
-};
+    // openEditModal,
+    // openDeleteModal,
+    openCreateOfferModal,
+}) => (
+    <GroupCard
+        name={name}
+        handleCreate={() => openCreateOfferModal()}
+        // handleDelete={() => openDeleteModal(categoryId)}
+        // handleEdit={() => openEditModal(categoryId)}
+    >
+        <OffersSection
+            categoryId={categoryId}
+        />
+    </GroupCard>
+);
 
 export default CategoryCard;
