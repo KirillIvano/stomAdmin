@@ -3,4 +3,5 @@ export {default as LayoutContainer} from './LayoutContainer';
 export {default as ErrorView} from './ErrorView';
 export {default as Preloader} from './Preloader';
 export {default as Modal, ModalControls} from './Modal';
+export {default as ConfirmationModal} from './ConfirmationModal';
 export {default as Input} from './Input';
