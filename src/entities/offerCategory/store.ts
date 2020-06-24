@@ -13,7 +13,7 @@ export class OfferCategoriesStore {
 
     @action
     addCategory(category: OfferCategory) {
-        this.offerCategories[category.id] = category;
+        this.offerCategories.set(category.id, category);
     }
 
     @action
@@ -21,6 +21,11 @@ export class OfferCategoriesStore {
         categories.forEach(
             category => this.offerCategories.set(`${category.id}`, category),
         );
+    }
+
+    @action
+    removeCategory(categoryId: string) {
+        this.offerCategories.delete(categoryId);
     }
 }
 

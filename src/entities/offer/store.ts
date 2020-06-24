@@ -17,8 +17,12 @@ export class OfferStore {
         this.offers.set(offer.id, offer);
     }
     @action
-    addOffers = async (offers: Offer[]) => {
-        offers.map(this.addOffer);
+    addOffers = async (newOffers: Offer[]) => {
+        newOffers.map(this.addOffer);
+    }
+    @action
+    removeOffer = async (offerId: string) => {
+        this.offers.delete(offerId);
     }
 }
 

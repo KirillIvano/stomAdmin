@@ -1,6 +1,13 @@
-export class Offer {
+export type Offer = {
     id: string;
+    categoryId: string;
     name: string;
     price: number;
-    categoryId: string;
+}
+
+export type OfferDto = {
+    id: number;
+    categoryId: number;
+    name: string;
+    price: number;
 }
