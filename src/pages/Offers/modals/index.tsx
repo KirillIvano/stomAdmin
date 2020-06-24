@@ -1,18 +1,20 @@
-import React from 'react';
-import {Subtract} from 'utility-types';
+import {createModalFacadeHOC} from '@/helpers/modals';
 
-import {ModalManager} from './modals';
+import {
+    CreateOfferModal,
+    DeleteOfferModal,
+    UpdateOfferModal,
+    CreateOfferGroupModal,
+    DeleteOfferGroupModal,
+    UpdateOfferGroupModal,
+} from './components';
 import {ModalType} from './types';
 
-type AdditionalPropsType = {
-    openedModal: ModalType;
-};
-
-export const withModalManager = <T extends AdditionalPropsType,>(Comp: React.ComponentType<T>) =>
-    (props: Subtract<T, AdditionalPropsType>) => (
-        <>
-            <Comp {...props as T} />
-            <ModalManager />
-        </>
-    );
-
+export const withModalManager = createModalFacadeHOC<ModalType>({
+    'offer_create': CreateOfferModal,
+    'offer_delete': DeleteOfferModal,
+    'offer_edit': UpdateOfferModal,
+    'group_create': CreateOfferGroupModal,
+    'group_delete': DeleteOfferGroupModal,
+    'group_edit': UpdateOfferGroupModal,
+});

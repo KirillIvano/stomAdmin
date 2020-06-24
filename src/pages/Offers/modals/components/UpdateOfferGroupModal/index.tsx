@@ -9,26 +9,27 @@ import {
     ErrorView,
 } from '@/uikit';
 
-import {createOfferState} from './localStore';
+import {updateOfferCategoryState} from './localStore';
+import {offerCategoriesStore} from '@/entities/offerCategory/store';
 
-type CreateOfferModalProps = {
+type UpdateOfferCategoryModalProps = {
     isOpened: boolean;
     selectedId: string;
     close: () => void;
 }
 
-const CreateOfferModal = observer(({
+const UpdateOfferCategoryModal = observer(({
     isOpened,
-    selectedId: categoryId,
+    selectedId,
     close,
-}: CreateOfferModalProps) => {
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
+}: UpdateOfferCategoryModalProps) => {
+    const {name: initialName} = offerCategoriesStore.offerCategories.get(selectedId);
+
+    const [name, setName] = useState(initialName);
     const [validationError, setValidationError] = useState<string | null>(null);
 
     const resetForm = () => {
         setName('');
-        setPrice('');
         setValidationError(null);
     };
 
@@ -36,42 +37,27 @@ const CreateOfferModal = observer(({
         loading,
         error: creatingError,
         success: creatingSuccess,
-    } = createOfferState;
+    } = updateOfferCategoryState;
 
     useEffect(
         () => {
             if (creatingSuccess) {
-                createOfferState.reset();
+                updateOfferCategoryState.reset();
                 resetForm();
                 close();
             }
         }, [creatingSuccess],
     );
 
-
-    const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.currentTarget;
-
-        if (value !== '' && isNaN(+value)) {
-            return;
-        }
-
-        setPrice(value);
-    };
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!name || !price) {
-            setValidationError('Имя и цена обязательны');
+        if (!name) {
+            setValidationError('Название обязательно');
             return;
         }
 
-        createOfferState.createOffer(
-            name,
-            +price,
-            categoryId,
-        );
+        updateOfferCategoryState.updateOfferCategory(selectedId, name);
     };
 
     return (
@@ -87,13 +73,6 @@ const CreateOfferModal = observer(({
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}
-                />
-                <Input
-                    placeholder={'цена'}
-                    disabled={loading}
-                    type={'number'}
-                    value={price}
-                    onChange={handlePriceChange}
                 />
 
                 <ModalControls>
@@ -112,4 +91,4 @@ const CreateOfferModal = observer(({
     );
 });
 
-export default CreateOfferModal;
+export default UpdateOfferCategoryModal;

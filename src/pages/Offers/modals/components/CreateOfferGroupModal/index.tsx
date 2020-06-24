@@ -9,26 +9,22 @@ import {
     ErrorView,
 } from '@/uikit';
 
-import {createOfferState} from './localStore';
+import {createOfferCategoryState} from './localStore';
 
-type CreateOfferModalProps = {
+type CreateOfferCateogoryModalProps = {
     isOpened: boolean;
-    selectedId: string;
     close: () => void;
 }
 
-const CreateOfferModal = observer(({
+const CreateOfferCateogoryModal = observer(({
     isOpened,
-    selectedId: categoryId,
     close,
-}: CreateOfferModalProps) => {
+}: CreateOfferCateogoryModalProps) => {
     const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
     const [validationError, setValidationError] = useState<string | null>(null);
 
     const resetForm = () => {
         setName('');
-        setPrice('');
         setValidationError(null);
     };
 
@@ -36,42 +32,27 @@ const CreateOfferModal = observer(({
         loading,
         error: creatingError,
         success: creatingSuccess,
-    } = createOfferState;
+    } = createOfferCategoryState;
 
     useEffect(
         () => {
             if (creatingSuccess) {
-                createOfferState.reset();
+                createOfferCategoryState.reset();
                 resetForm();
                 close();
             }
         }, [creatingSuccess],
     );
 
-
-    const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.currentTarget;
-
-        if (value !== '' && isNaN(+value)) {
-            return;
-        }
-
-        setPrice(value);
-    };
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!name || !price) {
-            setValidationError('Имя и цена обязательны');
+        if (!name) {
+            setValidationError('Название обязательно');
             return;
         }
 
-        createOfferState.createOffer(
-            name,
-            +price,
-            categoryId,
-        );
+        createOfferCategoryState.createOfferCategory(name);
     };
 
     return (
@@ -87,13 +68,6 @@ const CreateOfferModal = observer(({
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}
-                />
-                <Input
-                    placeholder={'цена'}
-                    disabled={loading}
-                    type={'number'}
-                    value={price}
-                    onChange={handlePriceChange}
                 />
 
                 <ModalControls>
@@ -112,4 +86,4 @@ const CreateOfferModal = observer(({
     );
 });
 
-export default CreateOfferModal;
+export default CreateOfferCateogoryModal;

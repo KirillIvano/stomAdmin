@@ -1,30 +1,18 @@
-import {observable, action} from 'mobx';
+import {action} from 'mobx';
 
 import {offerStore} from '@/entities/offer/store';
+import {clientifyOffer} from '@/entities/offer/transformers';
 import {createOffer} from '@/services/offers';
+import {ServiceStore} from '@/helpers/basicStore';
 
-class CreateOfferState {
-    @observable
-    isOfferCreatingInProgress = false;
-    @observable
-    offerCreatingError: null | string = null;
-    @observable
-    offerCreatingSuccess: boolean;
-
-    @action
-    resetOfferCreating = async () => {
-        this.isOfferCreatingInProgress = true;
-        this.offerCreatingError = null;
-        this.offerCreatingSuccess = false;
-    }
-
+class CreateOfferState extends ServiceStore {
     @action
     createOffer = async (
         name: string,
         price: number,
         categoryId: string,
     ) => {
-        this.resetOfferCreating();
+        this.reset();
 
         const offerCreateRes = await createOffer({
             name,
@@ -33,13 +21,15 @@ class CreateOfferState {
         });
 
         if (offerCreateRes.ok === false) {
-            this.offerCreatingError = offerCreateRes.error;
+            this.error = offerCreateRes.error;
         } else {
-            offerStore.addOffer(offerCreateRes.data.offer);
-            this.offerCreatingSuccess = true;
+            const clientifiedOffer = clientifyOffer(offerCreateRes.data.offer);
+
+            offerStore.addOffer(clientifiedOffer);
+            this.success = true;
         }
 
-        this.isOfferCreatingInProgress = false;
+        this.loading = false;
     }
 }
 

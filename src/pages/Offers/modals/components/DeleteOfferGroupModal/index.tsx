@@ -6,17 +6,17 @@ import {ConfirmationModal} from '@/uikit';
 import {deleteOfferState} from './localStore';
 import {offerStore} from '@/entities/offer/store';
 
-type DeleteOfferModalProps = {
+type DeleteOfferCategoryModalProps = {
     isOpened: boolean;
     selectedId: string;
     close: () => void;
 }
 
-const DeleteOfferModal = observer(({
+const DeleteOfferCategoryModal = observer(({
     isOpened,
-    selectedId: offerId,
+    selectedId: categoryId,
     close,
-}: DeleteOfferModalProps) => {
+}: DeleteOfferCategoryModalProps) => {
     const {
         loading: deletionLoading,
         error: deletionError,
@@ -26,7 +26,7 @@ const DeleteOfferModal = observer(({
     useEffect(
         () => {
             if (deletionSuccess) {
-                offerStore.removeOffer(offerId);
+                offerStore.removeOffer(categoryId);
                 deleteOfferState.reset();
                 close();
             }
@@ -41,9 +41,9 @@ const DeleteOfferModal = observer(({
             error={deletionError}
 
             onReject={close}
-            onConfirm={() => deleteOfferState.deleteOffer(offerId)}
+            onConfirm={() => deleteOfferState.deleteCategory(categoryId)}
         />
     );
 });
 
-export default DeleteOfferModal;
+export default DeleteOfferCategoryModal;

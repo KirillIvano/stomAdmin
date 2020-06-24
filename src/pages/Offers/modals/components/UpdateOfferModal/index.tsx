@@ -8,22 +8,25 @@ import {
     Button,
     ErrorView,
 } from '@/uikit';
+import {offerStore} from '@/entities/offer/store';
 
-import {createOfferState} from './localStore';
+import {updateOfferState} from './localStore';
 
-type CreateOfferModalProps = {
+type UpdateOfferModalProps = {
     isOpened: boolean;
     selectedId: string;
     close: () => void;
 }
 
-const CreateOfferModal = observer(({
+const UpdateOfferModal = observer(({
     isOpened,
-    selectedId: categoryId,
+    selectedId: offerId,
     close,
-}: CreateOfferModalProps) => {
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
+}: UpdateOfferModalProps) => {
+    const {name: initialName, price: initialPrice} = offerStore.offers.get(offerId);
+
+    const [name, setName] = useState(initialName);
+    const [price, setPrice] = useState<string>(`${initialPrice}`);
     const [validationError, setValidationError] = useState<string | null>(null);
 
     const resetForm = () => {
@@ -36,18 +39,17 @@ const CreateOfferModal = observer(({
         loading,
         error: creatingError,
         success: creatingSuccess,
-    } = createOfferState;
+    } = updateOfferState;
 
     useEffect(
         () => {
             if (creatingSuccess) {
-                createOfferState.reset();
+                updateOfferState.reset();
                 resetForm();
                 close();
             }
         }, [creatingSuccess],
     );
-
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = e.currentTarget;
@@ -67,10 +69,10 @@ const CreateOfferModal = observer(({
             return;
         }
 
-        createOfferState.createOffer(
+        updateOfferState.updateOffer(
+            offerId,
             name,
             +price,
-            categoryId,
         );
     };
 
@@ -101,7 +103,7 @@ const CreateOfferModal = observer(({
                         isDisabled={loading}
                         type="submit"
                     >
-                        Создать
+                        Изменить
                     </Button>
                 </ModalControls>
 
@@ -112,4 +114,4 @@ const CreateOfferModal = observer(({
     );
 });
 
-export default CreateOfferModal;
+export default UpdateOfferModal;

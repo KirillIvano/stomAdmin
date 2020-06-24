@@ -8,8 +8,11 @@ interface CategoryCardProps {
     categoryId: string;
     name: string;
 
-    // openEditModal: (id: number) => void;
-    // openDeleteModal: (id: number) => void;
+    openEditCategoryModal: () => void;
+    openDeleteCategoryModal: () => void;
+
+    openDeleteOfferModal: (id: string) => void;
+    openEditOfferModal: (id: string) => void;
     openCreateOfferModal: () => void;
 }
 
@@ -17,18 +20,24 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
     categoryId,
     name,
 
-    // openEditModal,
-    // openDeleteModal,
+    openEditCategoryModal,
+    openDeleteCategoryModal,
+
     openCreateOfferModal,
+    openDeleteOfferModal,
+    openEditOfferModal,
 }) => (
     <GroupCard
         name={name}
+
+        handleEdit={() => openEditCategoryModal()}
+        handleDelete={() => openDeleteCategoryModal()}
         handleCreate={() => openCreateOfferModal()}
-        // handleDelete={() => openDeleteModal(categoryId)}
-        // handleEdit={() => openEditModal(categoryId)}
     >
         <OffersSection
             categoryId={categoryId}
+            openDeleteModal={openDeleteOfferModal}
+            openEditModal={openEditOfferModal}
         />
     </GroupCard>
 );

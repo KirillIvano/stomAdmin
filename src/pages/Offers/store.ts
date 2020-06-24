@@ -1,28 +1,27 @@
-import {observable, action} from 'mobx';
+import {action} from 'mobx';
 
+import {BaseServiceStore} from '@/helpers/basicStore';
 import {getCategories} from '@/services/offers';
 import {offerCategoriesStore} from '@/entities/offerCategory/store';
+import {clientifyOfferCategory} from '@/entities/offerCategory/transformers';
 
-class OfferCategoriesGettingStore {
-    @observable
-    isCategoriesGettingInProgress = false;
-    @observable
-    categoriesGettingError: null | string = null;
-
+class OfferCategoriesGettingStore extends BaseServiceStore {
     @action
     getCategories = async () => {
-        this.isCategoriesGettingInProgress = true;
-        this.categoriesGettingError = null;
+        this.loading = true;
+        this.error = null;
 
         const categoriesRes = await getCategories();
 
         if (categoriesRes.ok === false) {
-            this.categoriesGettingError = categoriesRes.error;
+            this.error = categoriesRes.error;
         } else {
-            offerCategoriesStore.addCategories(categoriesRes.data.categories);
+            const clientifiedCategories = categoriesRes.data.categories.map(clientifyOfferCategory);
+
+            offerCategoriesStore.addCategories(clientifiedCategories);
         }
 
-        this.isCategoriesGettingInProgress = false;
+        this.loading = false;
     }
 }
 

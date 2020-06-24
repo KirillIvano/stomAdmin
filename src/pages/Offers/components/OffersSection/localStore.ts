@@ -2,6 +2,7 @@ import {observable, action} from 'mobx';
 
 import {offerStore} from '@/entities/offer/store';
 import {getOffers} from '@/services/offers';
+import { clientifyOffer } from '@/entities/offer/transformers';
 
 class CreateOfferState {
     @observable
@@ -19,7 +20,7 @@ class CreateOfferState {
         if (offersGetRes.ok === false) {
             this.offerGettingError = offersGetRes.error;
         } else {
-            offerStore.addOffers(offersGetRes.data.offers);
+            offerStore.addOffers(offersGetRes.data.offers.map(clientifyOffer));
         }
 
         this.offerGettingInProgress = false;

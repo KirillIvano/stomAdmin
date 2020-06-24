@@ -1,20 +1,20 @@
 import {action} from 'mobx';
 
-import {offerStore} from '@/entities/offer/store';
-import {deleteOffer} from '@/services/offers';
+import {offerCategoriesStore} from '@/entities/offerCategory/store';
+import {deleteOfferCategory} from '@/services/offers';
 import {ServiceStore} from '@/helpers/basicStore';
 
 class DeleteOfferState extends ServiceStore {
     @action
-    deleteOffer = async (offerId: string) => {
+    deleteCategory = async (categoryId: string) => {
         this.reset();
 
-        const offerDeleteRes = await deleteOffer({id: +offerId});
+        const offerDeleteRes = await deleteOfferCategory(+categoryId);
 
         if (offerDeleteRes.ok === false) {
             this.error = offerDeleteRes.error;
         } else {
-            offerStore.removeOffer(offerId);
+            offerCategoriesStore.removeCategory(categoryId);
             this.success = true;
         }
 
@@ -23,3 +23,4 @@ class DeleteOfferState extends ServiceStore {
 }
 
 export const deleteOfferState = new DeleteOfferState();
+
