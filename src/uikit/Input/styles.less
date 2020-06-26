@@ -1,18 +1,28 @@
 @import url("colors.less");
 
-.input {
-    display: block;
-    width: 100%;
-
-    background: white;
-    color: @black;
-
-    border-radius: 3px;
-    border: none;
-    padding: 6px 8px;
+.inputWrapper {
     margin-top: 12px;
-}
 
+    .label {
+        display: block;
+        font-size: .85rem;
+        color: #555;
+    }
+    
+    .input {
+        display: block;
+        width: 100%;
+    
+        background: white;
+        color: @black;
+    
+        border-radius: 3px;
+        border: none;
+        padding: 6px 8px;
+
+        margin-top: 2px;
+    }
+}
 .input::placeholder {
     color: @light-gray;
 }
