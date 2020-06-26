@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useContext} from 'react';
+import React, {useState, useCallback} from 'react';
 
 // большинство модалок - умные компоненты, им нужно знать только
 // selectedId - id текущего изменяемого элемента
@@ -23,8 +23,9 @@ export const ModalFacadeContext =
     React.createContext<{openModal: (modalName: string, id?: string) => void}>(null);
 
 export const createModalFacadeHOC =
-    <TNames extends string,>(modals: ModalMapping<TNames>) => {
-        return <TProps,>(Comp: React.ComponentType<TProps>) =>
+    <TNames extends string,>(modals: ModalMapping<TNames>) =>
+        <TProps,>(Comp: React.ComponentType<TProps>) =>
+
             (props: TProps) =>  {
                 const [openedModal, selectModal] = useState<null | TNames>();
                 const [selectedId, selectId] = useState<string | undefined>();
@@ -64,5 +65,4 @@ export const createModalFacadeHOC =
                     </ModalFacadeContext.Provider>
                 );
             };
-    };
 
