@@ -9,7 +9,7 @@ import {
     ErrorView,
 } from '@/uikit';
 
-import {updateOfferCategoryState} from './localStore';
+import {offerCategoryUpdateState} from './localStore';
 import {offerCategoriesStore} from '@/entities/offerCategory/store';
 
 type UpdateOfferCategoryModalProps = {
@@ -37,12 +37,12 @@ const UpdateOfferCategoryModal = observer(({
         loading,
         error: creatingError,
         success: creatingSuccess,
-    } = updateOfferCategoryState;
+    } = offerCategoryUpdateState;
 
     useEffect(
         () => {
             if (creatingSuccess) {
-                updateOfferCategoryState.reset();
+                offerCategoryUpdateState.reset();
                 resetForm();
                 close();
             }
@@ -57,7 +57,7 @@ const UpdateOfferCategoryModal = observer(({
             return;
         }
 
-        updateOfferCategoryState.updateOfferCategory(selectedId, name);
+        offerCategoryUpdateState.updateOfferCategory(selectedId, name);
     };
 
     return (
@@ -69,7 +69,7 @@ const UpdateOfferCategoryModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    placeholder={'имя'}
+                    labelText={'имя'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}

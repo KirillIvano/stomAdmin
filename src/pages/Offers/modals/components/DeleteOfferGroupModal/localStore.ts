@@ -4,7 +4,7 @@ import {offerCategoriesStore} from '@/entities/offerCategory/store';
 import {deleteOfferCategory} from '@/services/offers';
 import {ServiceStore} from '@/helpers/basicStore';
 
-class DeleteOfferState extends ServiceStore {
+class OfferDeleteState extends ServiceStore {
     @action
     deleteCategory = async (categoryId: string) => {
         this.reset();
@@ -22,5 +22,5 @@ class DeleteOfferState extends ServiceStore {
     }
 }
 
-export const deleteOfferState = new DeleteOfferState();
+export const offerDeleteState = new OfferDeleteState();
 

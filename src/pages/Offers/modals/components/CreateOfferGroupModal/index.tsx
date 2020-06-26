@@ -9,7 +9,7 @@ import {
     ErrorView,
 } from '@/uikit';
 
-import {createOfferCategoryState} from './localStore';
+import {offerCategoryCreateState} from './localStore';
 
 type CreateOfferCateogoryModalProps = {
     isOpened: boolean;
@@ -32,12 +32,12 @@ const CreateOfferCateogoryModal = observer(({
         loading,
         error: creatingError,
         success: creatingSuccess,
-    } = createOfferCategoryState;
+    } = offerCategoryCreateState;
 
     useEffect(
         () => {
             if (creatingSuccess) {
-                createOfferCategoryState.reset();
+                offerCategoryCreateState.reset();
                 resetForm();
                 close();
             }
@@ -52,7 +52,7 @@ const CreateOfferCateogoryModal = observer(({
             return;
         }
 
-        createOfferCategoryState.createOfferCategory(name);
+        offerCategoryCreateState.createOfferCategory(name);
     };
 
     return (
@@ -64,7 +64,7 @@ const CreateOfferCateogoryModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    placeholder={'имя'}
+                    labelText={'имя'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}

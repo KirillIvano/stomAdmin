@@ -5,7 +5,7 @@ import {clientifyOffer} from '@/entities/offer/transformers';
 import {createOffer} from '@/services/offers';
 import {ServiceStore} from '@/helpers/basicStore';
 
-class CreateOfferState extends ServiceStore {
+class OfferCreateState extends ServiceStore {
     @action
     createOffer = async (
         name: string,
@@ -33,4 +33,4 @@ class CreateOfferState extends ServiceStore {
     }
 }
 
-export const createOfferState = new CreateOfferState();
+export const offerCreateState = new OfferCreateState();

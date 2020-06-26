@@ -5,7 +5,7 @@ import {clientifyOfferCategory} from '@/entities/offerCategory/transformers';
 import {updateCategory} from '@/services/offers';
 import {ServiceStore} from '@/helpers/basicStore';
 
-class UpdateOfferCategoryState extends ServiceStore {
+class OfferCategoryUpdateState extends ServiceStore {
     @action
     updateOfferCategory = async (categoryId: string, name: string) => {
         this.reset();
@@ -25,4 +25,4 @@ class UpdateOfferCategoryState extends ServiceStore {
     }
 }
 
-export const updateOfferCategoryState = new UpdateOfferCategoryState();
+export const offerCategoryUpdateState = new OfferCategoryUpdateState();

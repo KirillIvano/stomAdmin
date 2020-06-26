@@ -5,7 +5,7 @@ import {clientifyOfferCategory} from '@/entities/offerCategory/transformers';
 import {createCategory} from '@/services/offers';
 import {ServiceStore} from '@/helpers/basicStore';
 
-class CreateOfferCategoryState extends ServiceStore {
+class OfferCategoryCreateState extends ServiceStore {
     @action
     createOfferCategory = async (name: string) => {
         this.reset();
@@ -25,4 +25,4 @@ class CreateOfferCategoryState extends ServiceStore {
     }
 }
 
-export const createOfferCategoryState = new CreateOfferCategoryState();
+export const offerCategoryCreateState = new OfferCategoryCreateState();

@@ -10,7 +10,7 @@ import {
 } from '@/uikit';
 import {offerStore} from '@/entities/offer/store';
 
-import {updateOfferState} from './localStore';
+import {offerUpdateState} from './localStore';
 
 type UpdateOfferModalProps = {
     isOpened: boolean;
@@ -39,12 +39,12 @@ const UpdateOfferModal = observer(({
         loading,
         error: creatingError,
         success: creatingSuccess,
-    } = updateOfferState;
+    } = offerUpdateState;
 
     useEffect(
         () => {
             if (creatingSuccess) {
-                updateOfferState.reset();
+                offerUpdateState.reset();
                 resetForm();
                 close();
             }
@@ -69,7 +69,7 @@ const UpdateOfferModal = observer(({
             return;
         }
 
-        updateOfferState.updateOffer(
+        offerUpdateState.updateOffer(
             offerId,
             name,
             +price,
@@ -85,13 +85,13 @@ const UpdateOfferModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    placeholder={'имя'}
+                    labelText={'имя'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}
                 />
                 <Input
-                    placeholder={'цена'}
+                    labelText={'цена'}
                     disabled={loading}
                     type={'number'}
                     value={price}

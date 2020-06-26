@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 
 import {ConfirmationModal} from '@/uikit';
 
-import {deleteOfferState} from './localStore';
+import {offerDeleteState} from './localStore';
 import {offerStore} from '@/entities/offer/store';
 
 type DeleteOfferCategoryModalProps = {
@@ -21,13 +21,13 @@ const DeleteOfferCategoryModal = observer(({
         loading: deletionLoading,
         error: deletionError,
         success: deletionSuccess,
-    } = deleteOfferState;
+    } = offerDeleteState;
 
     useEffect(
         () => {
             if (deletionSuccess) {
                 offerStore.removeOffer(categoryId);
-                deleteOfferState.reset();
+                offerDeleteState.reset();
                 close();
             }
         }, [deletionSuccess],
@@ -41,7 +41,7 @@ const DeleteOfferCategoryModal = observer(({
             error={deletionError}
 
             onReject={close}
-            onConfirm={() => deleteOfferState.deleteCategory(categoryId)}
+            onConfirm={() => offerDeleteState.deleteCategory(categoryId)}
         />
     );
 });

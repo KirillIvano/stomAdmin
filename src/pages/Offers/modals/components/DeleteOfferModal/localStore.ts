@@ -4,7 +4,7 @@ import {offerStore} from '@/entities/offer/store';
 import {deleteOffer} from '@/services/offers';
 import {ServiceStore} from '@/helpers/basicStore';
 
-class DeleteOfferState extends ServiceStore {
+class OfferDeleteState extends ServiceStore {
     @action
     deleteOffer = async (offerId: string) => {
         this.reset();
@@ -22,4 +22,4 @@ class DeleteOfferState extends ServiceStore {
     }
 }
 
-export const deleteOfferState = new DeleteOfferState();
+export const offerDeleteState = new OfferDeleteState();
