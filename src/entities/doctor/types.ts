@@ -1,7 +1,6 @@
 export type Doctor = {
-    id: number;
+    id: string;
     name: string;
     info: string;
     image: string;
-    isSpecial: boolean;
 }
