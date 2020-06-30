@@ -9,17 +9,17 @@ export const useRequest = <
     const [state, setLoadingState] =
         useState<{
             loading: boolean;
-            error?: string;
+            error: string | null;
             data?: TData;
-            loaded?: boolean;
-        }>({loading: loadOnInit, loaded: false});
+            success: boolean;
+        }>({loading: loadOnInit, error: null, success: false});
 
-    const handleLoad = (data: TData) => setLoadingState({loading: false, data, loaded: true});
-    const handleError = (error: string) => setLoadingState({loading: false, error, loaded: false});
+    const handleLoad = (data: TData) => setLoadingState({...state, loading: false, data, success: true});
+    const handleError = (error: string) => setLoadingState({loading: false, error, success: false});
 
     const start = useCallback(
         (params?: TParams): void => {
-            setLoadingState({loading: true, error: undefined, loaded: false});
+            setLoadingState({loading: true, error: null, success: false});
 
             dataGetter(params).then(
                 res => res.ok === false ?

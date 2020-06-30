@@ -1,25 +1,21 @@
 import {useState, useEffect} from 'react';
 
-export const useImagePreview = () => {
-    const [file, setFile] = useState<File>(null);
+export const useImagePreview = (imageFile: File): string => {
     const [imageUrl, setImageUrl] = useState<string>(null);
 
     useEffect(
         () => {
-            if (file) {
-                const newUrl = URL.createObjectURL(file);
+            if (imageFile) {
+                const newUrl = URL.createObjectURL(imageFile);
 
                 setImageUrl(newUrl);
 
                 return () => URL.revokeObjectURL(newUrl);
             }
         },
-        [file],
+        [imageFile],
     );
 
-    return {
-        setFile,
-        imageUrl,
-    };
+    return imageUrl;
 };
 
