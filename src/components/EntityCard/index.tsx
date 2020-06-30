@@ -4,14 +4,14 @@ import {DeleteIcon, EditIcon} from '@/uikit/Icons';
 
 import styles from './styles.less';
 
-interface OfferCardProps {
+interface EntityCardProps {
     name: string;
 
-    id: number;
+    id: string;
 
-    handleDeleteClick: (id: number) => void;
-    handleEditClick: (id: number) => void;
-    handleBodyClick?: (id: number) => void;
+    handleDeleteClick?: (id: string) => void;
+    handleEditClick?: (id: string) => void;
+    handleBodyClick?: (id: string) => void;
 }
 
 const EntityCard = ({
@@ -21,7 +21,7 @@ const EntityCard = ({
     handleDeleteClick,
     handleEditClick,
     handleBodyClick,
-}: OfferCardProps) => (
+}: EntityCardProps) => (
     <div
         className={styles.itemEditCard}
         onClick={handleBodyClick && (() => handleBodyClick(id))}

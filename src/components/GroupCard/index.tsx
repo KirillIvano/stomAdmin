@@ -10,6 +10,7 @@ import {
 import styles from './styles.less';
 
 type GroupCardProps = {
+    id: string;
     name: string;
     className?: string;
     children: React.ReactNode;
@@ -20,6 +21,7 @@ type GroupCardProps = {
 }
 
 const GroupCard = ({
+    id,
     name,
     className,
     children,
@@ -36,7 +38,7 @@ const GroupCard = ({
                 className={classnames(styles.categoryCard, className)}
                 onClick={() => setContentVisibility(isVisible => !isVisible)}
             >
-                <h1 className={styles.categoryName}>{name}</h1>
+                <h1 className={styles.categoryName}>{name}, id: {id}</h1>
                 <div onClick={e => e.stopPropagation()} className={styles.controls}>
                     <CreateIcon size={'lg'} handleClick={handleCreate} />
                     <DeleteIcon size={'lg'} handleClick={handleDelete} />
