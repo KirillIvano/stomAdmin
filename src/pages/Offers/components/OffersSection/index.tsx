@@ -3,6 +3,10 @@ import {observer} from 'mobx-react';
 
 import {EntityCard} from '@/components';
 import {offerStore} from '@/entities/offer/store';
+import {
+    ErrorView,
+    Preloader,
+} from '@/uikit';
 
 import {getOffersState} from './localStore';
 import styles from './styles.less';
@@ -19,7 +23,11 @@ const OffersSection: React.FC<OffersSectionProps> = observer(
         openEditModal,
         openDeleteModal,
     }) => {
-        const {getOffers} = getOffersState;
+        const {
+            getOffers,
+            offerGettingInProgress,
+            offerGettingError,
+        } = getOffersState;
 
         useEffect(() => {getOffers(categoryId);}, []);
 
@@ -29,6 +37,9 @@ const OffersSection: React.FC<OffersSectionProps> = observer(
                 .filter(offer => offer.categoryId === categoryId),
             [offerStore.offersArray],
         );
+
+        if (offerGettingInProgress) return <Preloader />;
+        if (offerGettingError) return <ErrorView>{offerGettingError}</ErrorView>;
 
         return (
             <div className={styles.offersSection}>

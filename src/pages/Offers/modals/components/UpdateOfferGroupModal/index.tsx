@@ -64,7 +64,7 @@ const UpdateOfferCategoryModal = observer(({
         <Modal
             handleClose={close}
 
-            closable={true}
+            closable={!loading}
             isOpen={isOpened}
         >
             <form onSubmit={handleSubmit}>

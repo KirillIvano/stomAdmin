@@ -14,7 +14,7 @@ import {ModalFacadeContext} from '@/helpers/modals';
 import {CategoryCard} from './components';
 import {withModalManager} from './modals';
 import {offerCategoriesGettingStore} from './store';
-import { ModalType } from './modals/types';
+import {ModalType} from './modals/types';
 
 
 const OffersPage = observer(() => {
@@ -40,12 +40,7 @@ const OffersPage = observer(() => {
             {
                 categoriesArray.map(
                     ({name, id: categoryId}) => (<CategoryCard
-                        openCreateOfferModal={() => openModal('offer_create', categoryId)}
-                        openDeleteOfferModal={offerId => openModal('offer_delete', offerId)}
-                        openEditOfferModal={offerId => openModal('offer_edit', offerId)}
-
-                        openDeleteCategoryModal={() => openModal('group_delete', categoryId)}
-                        openEditCategoryModal={() => openModal('group_edit', categoryId)}
+                        {...{}}
 
                         name={name}
                         categoryId={categoryId}
@@ -57,6 +52,6 @@ const OffersPage = observer(() => {
     );
 });
 
-const enchandtedModalManager = withModalManager(OffersPage);
+const enhancedModalManager = withModalManager(OffersPage);
 
-export default enchandtedModalManager;
+export default enhancedModalManager;
