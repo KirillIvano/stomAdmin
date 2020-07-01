@@ -11,6 +11,8 @@ export const useImagePreview = (imageFile: File): string => {
                 setImageUrl(newUrl);
 
                 return () => URL.revokeObjectURL(newUrl);
+            } else {
+                setImageUrl(null);
             }
         },
         [imageFile],
