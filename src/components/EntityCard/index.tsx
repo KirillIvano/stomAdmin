@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {DeleteIcon, EditIcon} from '@/uikit/Icons';
+import {DeleteIcon, EditIcon, PictureIcon} from '@/uikit/Icons';
 
 import styles from './styles.less';
 
@@ -12,8 +12,10 @@ interface EntityCardProps {
     handleDeleteClick?: (id: string) => void;
     handleEditClick?: (id: string) => void;
     handleBodyClick?: (id: string) => void;
+    handleImageSelect?: (id: string) => void;
 }
 
+// отрисовывает какой-либо предмет, не имеющий дочерних
 const EntityCard = ({
     name,
     id,
@@ -21,6 +23,7 @@ const EntityCard = ({
     handleDeleteClick,
     handleEditClick,
     handleBodyClick,
+    handleImageSelect,
 }: EntityCardProps) => (
     <div
         className={styles.itemEditCard}
@@ -30,6 +33,8 @@ const EntityCard = ({
         <div onClick={e => e.stopPropagation()} className={styles.itemControls}>
             <DeleteIcon size={'sm'} handleClick={() => handleDeleteClick(id)} />
             <EditIcon size={'sm'} handleClick={() => handleEditClick(id)} />
+
+            {handleImageSelect && <PictureIcon size={'sm'} handleClick={() => handleImageSelect(id)} />}
         </div>
     </div>
 );
