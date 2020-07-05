@@ -5,9 +5,3 @@ export type Offer = {
     price: number;
 }
 
-export type OfferDto = {
-    id: number;
-    categoryId: number;
-    name: string;
-    price: number;
-}

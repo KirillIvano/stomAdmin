@@ -3,36 +3,44 @@ import {observable, action} from 'mobx';
 import {Doctor} from './types';
 
 export class DoctorStore {
-    @observable
-    doctors = observable.array<Doctor>([], {deep: true});
+    @observable.ref
+    doctors: Doctor[] = [];
 
-    @action
-    addDoctor = async (doctor: Doctor) => {
-        this.doctors.push(doctor);
+    getDoctorbyId = (doctorId: string) => {
+        return this.doctors.find(doctor => doctor.id === doctorId);
     }
 
     @action
-    addDoctors = async (newDoctors: Doctor[]) => {
-        this.doctors.replace(newDoctors);
+    addDoctor = (doctor: Doctor) => {
+        this.doctors = [...this.doctors, doctor];
     }
 
     @action
-    updateDoctor = async (updatedDoctor: Doctor) => {
-        const doctorIndex = this.doctors
+    setDoctors = (newDoctors: Doctor[]) => {
+        this.doctors = newDoctors;
+    }
+
+    @action
+    addDoctors = (newDoctors: Doctor[]) => {
+        this.doctors = [...this.doctors, ...newDoctors];
+    }
+
+    @action
+    updateDoctor = (updatedDoctor: Doctor) => {
+        const doctorsCopy = [...this.doctors];
+        const doctorIndex = doctorsCopy
             .findIndex(doctor => doctor.id === updatedDoctor.id);
 
-        this.doctors[doctorIndex] = updatedDoctor;
+        doctorsCopy[doctorIndex] = updatedDoctor;
+
+        this.doctors = doctorsCopy;
     }
 
     @action
-    removeDoctor = async (doctorId: string) => {
-
-        const doctorIndex = this.doctors
-            .findIndex(doctor => {
-                doctor.id === doctorId;
-            });
-
-        delete this.doctors[doctorIndex];
+    removeDoctor = (doctorId: string) => {
+        this.doctors = this.doctors.filter(
+            ({id}) => id !== doctorId,
+        );
     }
 }
 
