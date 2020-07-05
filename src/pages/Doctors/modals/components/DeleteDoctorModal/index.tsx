@@ -2,22 +2,17 @@ import React, { useEffect } from 'react';
 import {observer} from 'mobx-react';
 
 import {ConfirmationModal} from '@/uikit';
+import {SmartModalProps} from '@/helpers/modals';
 
 import {doctorDeleteState} from './localStore';
 
-type DeleteDoctorModalProps = {
-    isOpened: boolean;
-    selectedId: string;
-
-    close: () => void;
-}
 
 const DeleteDoctorModal = observer(({
     isOpened,
     selectedId,
 
     close,
-}: DeleteDoctorModalProps) => {
+}: SmartModalProps) => {
     const {
         loading,
         error: deletingError,
@@ -28,8 +23,8 @@ const DeleteDoctorModal = observer(({
 
     useEffect(() => {
         if (deletingSuccess) {
-            close();
             resetDeleting();
+            close();
         }
     }, [deletingSuccess]);
 

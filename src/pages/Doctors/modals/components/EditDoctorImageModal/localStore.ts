@@ -2,24 +2,16 @@ import {action} from 'mobx';
 
 import {doctorStore} from '@/entities/doctor/store';
 import {clientifyDoctor} from '@/entities/doctor/transformers';
-import {updateDoctorInfo} from '@/services/doctors';
+import {updateDoctorImage} from '@/services/doctors';
 import {ServiceStore} from '@/helpers/basicStore';
 
 
-class DoctorInfoUpdateState extends ServiceStore {
+class DoctorImageUpdateState extends ServiceStore {
     @action
-    updateDoctorInfo = async ({
-        id,
-        name,
-        info,
-    }: {id: string; name?: string; info?: string}) => {
+    updateDoctorInfo = async (doctorId: string, image: File) => {
         this.reset();
 
-        const doctorUpdateRes = await updateDoctorInfo({
-            id: +id,
-            name,
-            info,
-        });
+        const doctorUpdateRes = await updateDoctorImage(+doctorId, image);
 
         if (doctorUpdateRes.ok === false) {
             this.error = doctorUpdateRes.error;
@@ -34,4 +26,4 @@ class DoctorInfoUpdateState extends ServiceStore {
     }
 }
 
-export const doctorInfoUpdateState = new DoctorInfoUpdateState();
+export const doctorImageUpdateState = new DoctorImageUpdateState();

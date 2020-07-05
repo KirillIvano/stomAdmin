@@ -12,18 +12,16 @@ class DoctorCreateState extends ServiceStore {
         info: string,
         image: File,
     ) => {
-        this.reset();
-
-        const offerCreateRes = await createDoctor({
+        const doctorCreateRes = await createDoctor({
             name,
             info,
             image,
         });
 
-        if (offerCreateRes.ok === false) {
-            this.error = offerCreateRes.error;
+        if (doctorCreateRes.ok === false) {
+            this.error = doctorCreateRes.error;
         } else {
-            const clientifiedDoctor = clientifyDoctor(offerCreateRes.data.doctor);
+            const clientifiedDoctor = clientifyDoctor(doctorCreateRes.data.doctor);
 
             doctorStore.addDoctor(clientifiedDoctor);
             this.success = true;
