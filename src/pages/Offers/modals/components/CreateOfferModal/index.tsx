@@ -8,20 +8,16 @@ import {
     Button,
     ErrorView,
 } from '@/uikit';
+import {SmartModalProps} from '@/helpers/modals';
 
 import {offerCreateState} from './localStore';
 
-type CreateOfferModalProps = {
-    isOpened: boolean;
-    selectedId: string;
-    close: () => void;
-}
 
 const CreateOfferModal = observer(({
     isOpened,
     selectedId: categoryId,
     close,
-}: CreateOfferModalProps) => {
+}: SmartModalProps) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [validationError, setValidationError] = useState<string | null>(null);
@@ -83,13 +79,13 @@ const CreateOfferModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    labelText={'имя'}
+                    labelText={'Название услуги'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}
                 />
                 <Input
-                    labelText={'цена'}
+                    labelText={'Цена услуги'}
                     disabled={loading}
                     type={'number'}
                     value={price}

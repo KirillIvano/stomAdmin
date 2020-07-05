@@ -9,20 +9,16 @@ import {
     ErrorView,
 } from '@/uikit';
 import {offerStore} from '@/entities/offer/store';
+import {SmartModalProps} from '@/helpers/modals';
 
 import {offerUpdateState} from './localStore';
 
-type UpdateOfferModalProps = {
-    isOpened: boolean;
-    selectedId: string;
-    close: () => void;
-}
 
 const UpdateOfferModal = observer(({
     isOpened,
     selectedId: offerId,
     close,
-}: UpdateOfferModalProps) => {
+}: SmartModalProps) => {
     const {name: initialName, price: initialPrice} = offerStore.offers.get(offerId);
 
     const [name, setName] = useState(initialName);
@@ -85,13 +81,13 @@ const UpdateOfferModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    labelText={'имя'}
+                    labelText={'Название услуги'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}
                 />
                 <Input
-                    labelText={'цена'}
+                    labelText={'Цена услуги'}
                     disabled={loading}
                     type={'number'}
                     value={price}

@@ -8,21 +8,17 @@ import {
     Button,
     ErrorView,
 } from '@/uikit';
+import {SmartModalProps} from '@/helpers/modals';
 
 import {offerCategoryUpdateState} from './localStore';
 import {offerCategoriesStore} from '@/entities/offerCategory/store';
 
-type UpdateOfferCategoryModalProps = {
-    isOpened: boolean;
-    selectedId: string;
-    close: () => void;
-}
 
 const UpdateOfferCategoryModal = observer(({
     isOpened,
     selectedId,
     close,
-}: UpdateOfferCategoryModalProps) => {
+}: SmartModalProps) => {
     const {name: initialName} = offerCategoriesStore.offerCategories.get(selectedId);
 
     const [name, setName] = useState(initialName);
@@ -69,7 +65,7 @@ const UpdateOfferCategoryModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    labelText={'имя'}
+                    labelText={'Название категории'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}

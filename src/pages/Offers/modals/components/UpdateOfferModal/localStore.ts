@@ -12,8 +12,6 @@ class OfferUpdateState extends ServiceStore {
         name: string,
         price: number,
     ) => {
-        this.reset();
-
         const offerUpdateRes = await updateOffer({id: +offerId, name, price});
 
         if (offerUpdateRes.ok === false) {

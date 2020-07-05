@@ -12,8 +12,6 @@ class OfferCreateState extends ServiceStore {
         price: number,
         categoryId: string,
     ) => {
-        this.reset();
-
         const offerCreateRes = await createOffer({
             name,
             price,

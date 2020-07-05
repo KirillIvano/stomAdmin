@@ -8,8 +8,6 @@ import {ServiceStore} from '@/helpers/basicStore';
 class OfferCategoryUpdateState extends ServiceStore {
     @action
     updateOfferCategory = async (categoryId: string, name: string) => {
-        this.reset();
-
         const offerCategoryEditRes = await updateCategory(+categoryId, name);
 
         if (offerCategoryEditRes.ok === false) {

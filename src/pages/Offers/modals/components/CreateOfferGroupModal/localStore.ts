@@ -8,8 +8,6 @@ import {ServiceStore} from '@/helpers/basicStore';
 class OfferCategoryCreateState extends ServiceStore {
     @action
     createOfferCategory = async (name: string) => {
-        this.reset();
-
         const offerCreateRes = await createCategory(name);
 
         if (offerCreateRes.ok === false) {

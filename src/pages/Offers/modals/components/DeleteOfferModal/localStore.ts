@@ -7,8 +7,6 @@ import {ServiceStore} from '@/helpers/basicStore';
 class OfferDeleteState extends ServiceStore {
     @action
     deleteOffer = async (offerId: string) => {
-        this.reset();
-
         const offerDeleteRes = await deleteOffer({id: +offerId});
 
         if (offerDeleteRes.ok === false) {

@@ -2,21 +2,17 @@ import React, {useEffect} from 'react';
 import {observer} from 'mobx-react';
 
 import {ConfirmationModal} from '@/uikit';
-
-import {offerDeleteState} from './localStore';
+import {SmartModalProps} from '@/helpers/modals';
 import {offerStore} from '@/entities/offer/store';
 
-type DeleteOfferCategoryModalProps = {
-    isOpened: boolean;
-    selectedId: string;
-    close: () => void;
-}
+import {offerDeleteState} from './localStore';
+
 
 const DeleteOfferCategoryModal = observer(({
     isOpened,
     selectedId: categoryId,
     close,
-}: DeleteOfferCategoryModalProps) => {
+}: SmartModalProps) => {
     const {
         loading: deletionLoading,
         error: deletionError,
@@ -26,8 +22,8 @@ const DeleteOfferCategoryModal = observer(({
     useEffect(
         () => {
             if (deletionSuccess) {
-                offerStore.removeOffer(categoryId);
                 offerDeleteState.reset();
+                offerStore.removeOffer(categoryId);
                 close();
             }
         }, [deletionSuccess],
@@ -35,7 +31,7 @@ const DeleteOfferCategoryModal = observer(({
 
     return (
         <ConfirmationModal
-            content={'Вы точно хотите это удалить?'}
+            content={'Вы точно хотите удалить эту категорию и все содержащиеся в ней услуги?'}
             isOpen={isOpened}
             disabled={deletionLoading}
             error={deletionError}

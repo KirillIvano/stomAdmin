@@ -11,15 +11,15 @@ import {
 
 import {offerCategoryCreateState} from './localStore';
 
-type CreateOfferCateogoryModalProps = {
+type CreateOfferCategoryModalProps = {
     isOpened: boolean;
     close: () => void;
 }
 
-const CreateOfferCateogoryModal = observer(({
+const CreateOfferCategoryModal = observer(({
     isOpened,
     close,
-}: CreateOfferCateogoryModalProps) => {
+}: CreateOfferCategoryModalProps) => {
     const [name, setName] = useState('');
     const [validationError, setValidationError] = useState<string | null>(null);
 
@@ -64,7 +64,7 @@ const CreateOfferCateogoryModal = observer(({
         >
             <form onSubmit={handleSubmit}>
                 <Input
-                    labelText={'имя'}
+                    labelText={'Название категории'}
                     disabled={loading}
                     value={name}
                     onChange={e => setName(e.currentTarget.value)}
@@ -86,4 +86,4 @@ const CreateOfferCateogoryModal = observer(({
     );
 });
 
-export default CreateOfferCateogoryModal;
+export default CreateOfferCategoryModal;
