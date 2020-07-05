@@ -16,7 +16,7 @@ const App = () => {
                         <Route
                             exact
                             path="/"
-                            component={React.lazy(() => import('./../pages/Main/index'))}
+                            component={React.lazy(() => import('../pages/Main/index'))}
                         />
                         <Route
                             exact
@@ -25,13 +25,13 @@ const App = () => {
                         />
                         <Route
                             exact
-                            path="/doctor/:doctorId"
-                            component={React.lazy(() => import('../pages/Doctors/index'))}
+                            path="/offers"
+                            component={React.lazy(() => import('./../pages/Offers/index'))}
                         />
                         <Route
                             exact
-                            path="/offers"
-                            component={React.lazy(() => import('./../pages/Offers/index'))}
+                            path="/previews"
+                            component={React.lazy(() => import('../pages/Previews/index'))}
                         />
                     </Switch>
                 </Suspense>

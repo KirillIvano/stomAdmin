@@ -22,7 +22,8 @@ export const jsonFetch = async <T extends object,>(
         status = res.status;
 
         body = await res.json();
-    } catch {
+    } catch(e) {
+        console.error(e);
         return {error: 'Unexpected error', ok: false, status: 500};
     }
 

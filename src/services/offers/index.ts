@@ -1,4 +1,5 @@
 import {jsonFetch} from '@/helpers/jsonFetch';
+import {getRequestUrl} from '@/services/helpers';
 
 import {OfferCategoryDto, OfferDto} from './dto';
 
@@ -7,13 +8,13 @@ export const getCategories = () =>
 
 export const deleteOfferCategory = (categoryId: number) =>
     jsonFetch(
-        `http://localhost:5000/offer/category/${categoryId}`,
+        getRequestUrl(`/offer/category/${categoryId}`),
         {method: 'DELETE'},
     );
 
 export const createCategory = (name: string) =>
     jsonFetch<{category: OfferCategoryDto}>(
-        'http://localhost:5000/offer/category',
+        getRequestUrl('/offer/category'),
         {
             method: 'POST',
             body: JSON.stringify({name}),
@@ -25,7 +26,7 @@ export const createCategory = (name: string) =>
 
 export const updateCategory = (categoryId: number, name: string) =>
     jsonFetch<{category: OfferCategoryDto}>(
-        `http://localhost:5000/offer/category/${categoryId}`,
+        getRequestUrl(`/offer/category/${categoryId}`),
         {
             method: 'PUT',
             body: JSON.stringify({name}),
@@ -37,7 +38,9 @@ export const updateCategory = (categoryId: number, name: string) =>
 
 
 export const getOffers = (categoryId: string) =>
-    jsonFetch<{offers: OfferDto[]}>(`http://localhost:5000/offer/category/${categoryId}/offers`);
+    jsonFetch<{offers: OfferDto[]}>(
+        getRequestUrl(`/offer/category/${categoryId}/offers`),
+    );
 
 export const deleteOffer = ({id}: {id: number}) =>
     jsonFetch<{ok: boolean}>(
@@ -49,7 +52,7 @@ export const createOffer = (
     {name, price, categoryId}: {name: string; price: number; categoryId: string},
 ) =>
     jsonFetch<{offer: OfferDto}>(
-        'http://localhost:5000/offer',
+        getRequestUrl('/offer'),
         {
             method: 'POST',
             body: JSON.stringify({name, price, categoryId}),
@@ -62,7 +65,7 @@ export const createOffer = (
 export const updateOffer = (
     {id, ...body}: {name?: string; price?: number; id: number},
 ) => jsonFetch<{offer: OfferDto}>(
-    `http://localhost:5000/offer/${id}`,
+    getRequestUrl(`/offer/${id}`),
     {
         method: 'PUT',
         body: JSON.stringify(body),

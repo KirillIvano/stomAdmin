@@ -7,7 +7,7 @@ import React, {useState, useCallback} from 'react';
 // создание фасада, который отвечает за модалки позволяет сократить количество boilerplate кода
 // те модалки, которые более глупы, могут создаваться напрямую, без фасада
 
-type SmartModalProps = {
+export type SmartModalProps = {
     selectedId: string;
     isOpened: boolean;
     close: () => void;

@@ -25,7 +25,6 @@ const prod = {
 
     ],
     mode: 'production',
-    watch: true,
 
     module: {
         rules: [

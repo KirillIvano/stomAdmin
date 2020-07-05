@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 
 import {LayoutContainer} from '@/uikit';
 
@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 const linksConfigs: [string, string][] = [
     ['/doctors', 'Врачи'],
     ['/offers', 'Услуги'],
+    ['/previews', 'Превью'],
 ];
 
 const HeaderNav = () => {

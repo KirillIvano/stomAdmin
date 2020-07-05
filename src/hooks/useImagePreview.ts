@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 
-export const useImagePreview = (imageFile: File): string => {
-    const [imageUrl, setImageUrl] = useState<string>(null);
+export const useImagePreview = (imageFile: File, defaultImage?: string): string => {
+    const [imageUrl, setImageUrl] = useState<string>(defaultImage);
 
     useEffect(
         () => {
