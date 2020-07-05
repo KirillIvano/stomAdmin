@@ -7,4 +7,4 @@ export {default as ConfirmationModal} from './ConfirmationModal';
 export {default as Input} from './Input';
 export {default as ImagePreview} from './ImagePreview';
 export {default as FileInput} from './FileInput';
-
+export {default as PropView} from './PropView';

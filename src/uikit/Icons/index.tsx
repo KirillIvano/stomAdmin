@@ -5,6 +5,7 @@ import styles from './styles.less';
 import deleteIconSrc from './images/delete.svg';
 import addIconSrc from './images/add.svg';
 import editIconSrc from './images/edit.svg';
+import pictureIconSrc from './images/picture.svg';
 
 type IconProps =  {
     size: 'sm' | 'lg';
@@ -39,3 +40,4 @@ const createIcon = (src: string) => ({
 export const DeleteIcon = createIcon(deleteIconSrc);
 export const CreateIcon = createIcon(addIconSrc);
 export const EditIcon = createIcon(editIconSrc);
+export const PictureIcon = createIcon(pictureIconSrc);
