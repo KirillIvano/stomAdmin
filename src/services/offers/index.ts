@@ -1,7 +1,7 @@
 import {jsonFetch} from '@/helpers/jsonFetch';
 import {getRequestUrl} from '@/services/helpers';
 
-import {OfferCategoryDto, OfferDto} from './dto';
+import {OfferCategoryDto, OfferDto, CategoryPreviewDto} from './dto';
 
 export const getCategories = () =>
     jsonFetch<{categories: OfferCategoryDto[]}>('http://localhost:5000/offer/category/all');
@@ -49,7 +49,7 @@ export const deleteOffer = ({id}: {id: number}) =>
     );
 
 export const createOffer = (
-    {name, price, categoryId}: {name: string; price: number; categoryId: string},
+    {name, price, categoryId}: {name: string; price: number; categoryId: number},
 ) =>
     jsonFetch<{offer: OfferDto}>(
         getRequestUrl('/offer'),
@@ -74,3 +74,9 @@ export const updateOffer = (
         },
     },
 );
+
+
+export const getCategoryPreviews = () =>
+    jsonFetch<{previews: CategoryPreviewDto[]}>(
+        getRequestUrl('/offer/preview'),
+    );
