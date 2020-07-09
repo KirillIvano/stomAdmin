@@ -7,19 +7,21 @@ import styles from './styles.less';
 
 interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     wrapperClassName?: string;
+
     labelText: string;
 }
 
 const FileInput = ({
     wrapperClassName,
     labelText,
+    className,
 
     ...props
 }: FileInputProps) => {
     const inputId = generateUniqueId();
 
     return (
-        <div className={classnames(styles.wrapper, wrapperClassName)}>
+        <div className={classnames(styles.wrapper, wrapperClassName, className)}>
             <label
                 className={styles.label}
                 htmlFor={inputId}

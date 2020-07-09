@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect} from 'react';
+import React, {useMemo, useEffect, useState} from 'react';
 import {observer} from 'mobx-react';
 
 import {ModalControls, Modal, Button, ErrorView} from '@/uikit';
@@ -21,6 +21,7 @@ const EditDoctorInfoModal = observer(({
 
     const [image, setImage] = useEffectedState(null);
     const imageUrl = useImagePreview(image, doctor.image);
+    const [validationError, setValidationError] = useState('');
 
     const {loading, error, success} = doctorImageUpdateState;
 
@@ -36,8 +37,15 @@ const EditDoctorInfoModal = observer(({
         }
     }, [success]);
 
-    const handleConfirm = () =>
+    const handleConfirm = () => {
+        if (!image) {
+            setValidationError('Картинка обязательна');
+            return;
+        }
+
+        setValidationError('');
         doctorImageUpdateState.updateDoctorInfo(selectedId, image);
+    };
 
     return (
         <Modal
@@ -51,7 +59,9 @@ const EditDoctorInfoModal = observer(({
                 <Button onClick={close} styling='warning' isDisabled={loading}>Отмена</Button>
                 <Button onClick={handleConfirm} isDisabled={loading}>Подтвердить</Button>
             </ModalControls>
+
             {error && <ErrorView>{error}</ErrorView>}
+            {validationError && <ErrorView>{validationError}</ErrorView>}
         </Modal>
     );
 });

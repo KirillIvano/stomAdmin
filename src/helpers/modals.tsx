@@ -22,6 +22,8 @@ type ModalMapping<TNames extends string> = Record<
 export const ModalFacadeContext =
     React.createContext<{openModal: (modalName: string, id?: string) => void}>(null);
 
+export type ModalOpener<T extends string> = ({openModal: (modalName: T, id?: string) => void})
+
 export const createModalFacadeHOC =
     <TNames extends string,>(modals: ModalMapping<TNames>) =>
         <TProps,>(Comp: React.ComponentType<TProps>) =>

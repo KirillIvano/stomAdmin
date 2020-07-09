@@ -1,7 +1,14 @@
 import {jsonFetch} from '@/helpers/jsonFetch';
 import {getRequestUrl} from '@/services/helpers';
 
-import {OfferCategoryDto, OfferDto, CategoryPreviewDto} from './dto';
+import {
+    OfferCategoryDto,
+    OfferDto,
+    CategoryPreviewDto,
+
+    CreateCategoryPreviewParams,
+    EditCategoryPreviewParams,
+} from './dto';
 
 export const getCategories = () =>
     jsonFetch<{categories: OfferCategoryDto[]}>('http://localhost:5000/offer/category/all');
@@ -35,7 +42,6 @@ export const updateCategory = (categoryId: number, name: string) =>
             },
         },
     );
-
 
 export const getOffers = (categoryId: string) =>
     jsonFetch<{offers: OfferDto[]}>(
@@ -79,4 +85,56 @@ export const updateOffer = (
 export const getCategoryPreviews = () =>
     jsonFetch<{previews: CategoryPreviewDto[]}>(
         getRequestUrl('/offer/preview'),
+    );
+
+export const createCategoryPreview = ({
+    image,
+    name,
+    categoryId,
+}: CreateCategoryPreviewParams) => {
+    const body = new FormData();
+
+    body.append('image', image);
+    body.append('name', name);
+    body.append('categoryId', categoryId);
+
+    return jsonFetch<{preview: CategoryPreviewDto}>(
+        getRequestUrl('/offer/preview'),
+        {
+            method: 'POST',
+            body,
+        },
+    );
+};
+
+export const updateCategoryPreview = (id: number, body: EditCategoryPreviewParams) =>
+    jsonFetch<{preview: CategoryPreviewDto}>(
+        getRequestUrl(`/offer/preview/${id}`),
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        },
+    );
+
+export const updatePreviewImage = (id: number, image: File) => {
+    const body = new FormData();
+
+    body.append('image', image);
+
+    return jsonFetch<{preview: CategoryPreviewDto}>(
+        getRequestUrl(`/offer/preview/${id}/image`),
+        {
+            method: 'PUT',
+            body,
+        },
+    );
+};
+
+export const deleteCategoryPreview = (id: number) =>
+    jsonFetch(
+        getRequestUrl(`/offer/preview/${id}`),
+        {method: 'DELETE'},
     );

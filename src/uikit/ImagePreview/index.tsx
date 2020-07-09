@@ -5,7 +5,7 @@ import styles from './styles.less';
 import placeholder from './images/placeholder.jpg';
 
 interface ImagePreviewProps extends React.HTMLAttributes<HTMLDivElement> {
-    imageUrl?: string;
+    imageUrl: string;
 
     className?: string;
 }

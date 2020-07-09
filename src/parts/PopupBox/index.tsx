@@ -31,10 +31,13 @@ const PopupMessage = ({
         <div
             className={messageClass}
         >
-            <p>{text}xxxxxxxxxxxxxxxxxxxxx</p>
+            <p>{text}</p>
         </div>
     );
 };
+
+
+
 const PopupBox = observer(() => {
     const {messages} = popupMessagesStore;
 

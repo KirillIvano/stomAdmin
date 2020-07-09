@@ -31,9 +31,8 @@ const EntityCard = ({
     >
         <p className={styles.itemName}>{name}</p>
         <div onClick={e => e.stopPropagation()} className={styles.itemControls}>
-            <DeleteIcon size={'sm'} handleClick={() => handleDeleteClick(id)} />
-            <EditIcon size={'sm'} handleClick={() => handleEditClick(id)} />
-
+            {handleDeleteClick && <DeleteIcon size={'sm'} handleClick={() => handleDeleteClick(id)} />}
+            {handleEditClick && <EditIcon size={'sm'} handleClick={() => handleEditClick(id)} />}
             {handleImageSelect && <PictureIcon size={'sm'} handleClick={() => handleImageSelect(id)} />}
         </div>
     </div>

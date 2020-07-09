@@ -3,14 +3,14 @@ import classnames from 'classnames';
 
 import styles from './styles.less';
 
-type OptionProps<TId = string> = {
+type OptionProps = {
     name: string;
     id: string;
 
     handleSelect: (id: string, name: string) => void;
 }
 
-const Option = React.memo(({
+const CustomOption = React.memo(({
     name,
     id,
     handleSelect,
@@ -22,11 +22,12 @@ const Option = React.memo(({
         {name}
     </li>
 ));
-Option.displayName = 'Option';
+CustomOption.displayName = 'CustomOption';
 
 
 interface SelectProps<TId = string> extends React.SelectHTMLAttributes<HTMLDivElement> {
     items: {name: string; id: string}[];
+    label?: string;
 
     handleSelect: (id: TId) => void;
 }
@@ -38,11 +39,11 @@ type SelectState = {
     selectedName: string;
 }
 
-class Select extends React.Component<SelectProps, SelectState> {
+class CustomSelect extends React.Component<SelectProps, SelectState> {
     state: SelectState = {
         isOpen: false,
         position: 'bottom',
-        selectedName: 'Выберите что-нибудь',
+        selectedName: 'Нажмите...',
     };
 
     private selectRef = React.createRef<HTMLDivElement>();
@@ -71,21 +72,45 @@ class Select extends React.Component<SelectProps, SelectState> {
         this.setState({isOpen: !isOpen});
     }
 
+    handleOutClick = () => {
+        const {isOpen} = this.state;
+
+        if (isOpen) {
+            this.setState({isOpen: false});
+        }
+    }
+
+    handleWrapperClick = (e: MouseEvent) => {
+        e.stopPropagation();
+    }
+
+    componentDidMount() {
+        window.addEventListener('click', this.handleOutClick);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('click', this.handleOutClick);
+    }
+
     render() {
         const {
             isOpen,
             selectedName,
             position,
-            ...props
         } = this.state;
-        const {items} = this.props;
+        const {items, label} = this.props;
 
         return (
             <div
-                {...props}
                 ref={this.selectRef}
                 className={styles.select}
+
+                onClick={e => {
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                }}
             >
+                {label && <p className={styles.label}>{label}</p>}
+
                 <div
                     className={styles.selectButton}
                     onClick={this.toggleVisibility}
@@ -103,7 +128,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                         {
                             items.map(
                                 ({name, id}) => (
-                                    <Option
+                                    <CustomOption
                                         key={id}
                                         name={name}
                                         id={id}
@@ -119,4 +144,4 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
 }
 
-export default Select;
+export default CustomSelect;

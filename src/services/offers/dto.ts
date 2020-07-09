@@ -26,3 +26,14 @@ export type UpdateCategoryPreview = {
     name?: string;
     categoryId?: number;
 }
+
+export type CreateCategoryPreviewParams = {
+    name: string;
+    categoryId: string;
+    image: File;
+}
+
+export type EditCategoryPreviewParams = {
+    name?: string;
+    categoryId?: string;
+}

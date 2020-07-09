@@ -15,7 +15,7 @@ class OfferCreateState extends ServiceStore {
         const offerCreateRes = await createOffer({
             name,
             price,
-            categoryId,
+            categoryId: +categoryId,
         });
 
         if (offerCreateRes.ok === false) {

@@ -4,8 +4,3 @@ export type ModalType = 'group_edit' |
     'offer_edit' |
     'offer_delete' |
     'offer_create' | null;
-
-export type OffersModalsStateType = {
-    openedModal: ModalType;
-    selectedItemId: number | null;
-};
