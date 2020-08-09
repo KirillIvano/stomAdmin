@@ -14,7 +14,7 @@ const dev = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
-        port: '8080',
+        port: '8000',
         hotOnly: true,
         historyApiFallback: true,
         headers: {
@@ -28,8 +28,9 @@ const dev = {
         new webpack.HotModuleReplacementPlugin(),
         new CleanObsoleteChunks(),
         new webpack.DefinePlugin({
-            SERVER_ORIGIN: '"http://localhost:5000"',
-            IMAGE_HOST: '"http://localhost:5000/images"',
+            // SERVER_ORIGIN: '"http://localhost:5000"',
+            SERVER_ORIGIN: '"https://api.mkdentalst.ru"',
+            IMAGE_HOST: '"https://api.mkdentalst.ru/images"',
         }),
     ],
     mode: 'development',

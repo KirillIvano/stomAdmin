@@ -27,6 +27,15 @@ export class CategoriesPreviewsStore {
     removePreview(previewId: string) {
         this.categoriesPreviews.delete(previewId);
     }
+
+    @action
+    removePreviewsByCategoryId(categoryId: string) {
+        for (const [previewId, preview] of this.categoriesPreviews.entries()) {
+            if (preview.categoryId === categoryId) {
+                this.categoriesPreviews.delete(previewId);
+            }
+        }
+    }
 }
 
 export const categoriesPreviewsStore = new CategoriesPreviewsStore();

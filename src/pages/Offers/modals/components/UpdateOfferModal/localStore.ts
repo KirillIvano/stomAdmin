@@ -11,8 +11,9 @@ class OfferUpdateState extends ServiceStore {
         offerId: string,
         name: string,
         price: number,
+        description: string,
     ) => {
-        const offerUpdateRes = await updateOffer({id: +offerId, name, price});
+        const offerUpdateRes = await updateOffer({id: +offerId, name, price, description});
 
         if (offerUpdateRes.ok === false) {
             this.error = offerUpdateRes.error;

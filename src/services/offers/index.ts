@@ -11,7 +11,7 @@ import {
 } from './dto';
 
 export const getCategories = () =>
-    jsonFetch<{categories: OfferCategoryDto[]}>('http://localhost:5000/offer/category/all');
+    jsonFetch<{categories: OfferCategoryDto[]}>(getRequestUrl('/offer/category/all'));
 
 export const deleteOfferCategory = (categoryId: number) =>
     jsonFetch(
@@ -45,23 +45,23 @@ export const updateCategory = (categoryId: number, name: string) =>
 
 export const getOffers = (categoryId: string) =>
     jsonFetch<{offers: OfferDto[]}>(
-        getRequestUrl(`/offer/category/${categoryId}/offers`),
+        getRequestUrl(`/offer/category/${categoryId}`),
     );
 
 export const deleteOffer = ({id}: {id: number}) =>
     jsonFetch<{ok: boolean}>(
-        `http://localhost:5000/offer/${id}`,
+        getRequestUrl(`/offer/${id}`),
         {method: 'DELETE'},
     );
 
 export const createOffer = (
-    {name, price, categoryId}: {name: string; price: number; categoryId: number},
+    {name, price, categoryId, description}: {name: string; price: number; categoryId: number; description?: string},
 ) =>
     jsonFetch<{offer: OfferDto}>(
         getRequestUrl('/offer'),
         {
             method: 'POST',
-            body: JSON.stringify({name, price, categoryId}),
+            body: JSON.stringify({name, price, categoryId, description}),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -69,7 +69,7 @@ export const createOffer = (
     );
 
 export const updateOffer = (
-    {id, ...body}: {name?: string; price?: number; id: number},
+    {id, ...body}: {name?: string; price?: number; description?: string; id: number},
 ) => jsonFetch<{offer: OfferDto}>(
     getRequestUrl(`/offer/${id}`),
     {

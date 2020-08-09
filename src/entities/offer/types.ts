@@ -3,5 +3,6 @@ export type Offer = {
     categoryId: string;
     name: string;
     price: number;
+    description?: string;
 }
 

@@ -20,11 +20,14 @@ const CreateOfferModal = observer(({
 }: SmartModalProps) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+
     const [validationError, setValidationError] = useState<string | null>(null);
 
     const resetForm = () => {
         setName('');
         setPrice('');
+        setDescription('');
         setValidationError(null);
     };
 
@@ -67,6 +70,7 @@ const CreateOfferModal = observer(({
             name,
             +price,
             categoryId,
+            description,
         );
     };
 
@@ -90,6 +94,12 @@ const CreateOfferModal = observer(({
                     type={'number'}
                     value={price}
                     onChange={handlePriceChange}
+                />
+                <Input
+                    labelText={'Дополнительное описание'}
+                    disabled={loading}
+                    value={description}
+                    onChange={e => setDescription(e.currentTarget.value)}
                 />
 
                 <ModalControls>

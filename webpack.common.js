@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.tsx',
@@ -7,13 +8,16 @@ module.exports = {
         extensions: ['.ts', '.js', '.tsx'],
         alias: {
             '@': path.resolve(__dirname, 'src/'),
-            '@styles': path.resolve(__dirname, 'src/common')
+            '@styles': path.resolve(__dirname, 'src/common'),
         },
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             minify: false,
+        }),
+        new webpack.DefinePlugin({
+            PASSWORD: `'${process.env.ADMIN_PASSWORD}'`,
         }),
     ],
     module: {

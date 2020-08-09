@@ -3,6 +3,7 @@ export type OfferDto = {
     categoryId: number;
     name: string;
     price: number;
+    description?: string;
 }
 
 export type UpdateOfferDto = {

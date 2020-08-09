@@ -1,4 +1,5 @@
 import {observable, action, computed} from 'mobx';
+import { categoriesPreviewsStore } from '../categoryPreview/store';
 
 import {OfferCategory} from './types';
 
@@ -25,6 +26,7 @@ export class OfferCategoriesStore {
 
     @action
     removeCategory(categoryId: string) {
+        categoriesPreviewsStore.removePreviewsByCategoryId(categoryId);
         this.offerCategories.delete(categoryId);
     }
 }

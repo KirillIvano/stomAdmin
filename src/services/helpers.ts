@@ -1,2 +1,4 @@
-export const getRequestUrl = (path: string) =>
-    `${SERVER_ORIGIN}${path}`;
+import qs from 'qs';
+
+export const getRequestUrl = (path: string, args?: object) =>
+    `${SERVER_ORIGIN}${path}?${qs.stringify(args)}`;

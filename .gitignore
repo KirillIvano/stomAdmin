@@ -3,3 +3,4 @@ jsonconfig.json
 dist/
 node_modules/
 styles.less.d.ts
+.env
