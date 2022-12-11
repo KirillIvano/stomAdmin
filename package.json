@@ -60,7 +60,7 @@
   "dependencies": {
     "@types/classnames": "^2.2.10",
     "classnames": "^2.2.6",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
